@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Flores e Rosas</title>
+    <style>
+        /* Seus estilos aqui */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav {
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .item {
+            width: 22%;
+            background-color: #fff;
+            margin: 10px;
+            padding: 15px;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .comprar-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Minha Loja de Flores e Rosas</h1>
+    </header>
+
+    <nav>
+        <a href="#">Início</a> |
+        <a href="#">Flores</a> |
+        <a href="#">Rosas</a>
+    </nav>
+
+    <section id="itens-container">
+        <!-- Itens serão adicionados dinamicamente aqui -->
+    </section>
+
+    <script>
+        const itensData = [];
+
+        for (let i = 1; i <= 25; i++) {
+            const nomeFlor = `Flor ${i}`;
+            const descricaoFlor = `Descrição da ${nomeFlor}.`;
+            const precoFlor = `R$ ${Math.floor(Math.random() * (50 - 10 + 1)) + 10},00`;
+            const imgSrc = i % 2 === 0
+                ? 'pexels-secret-garden-931177.jpg'
+                : 'pexels-nubia-navarro-(nubikini)-1178986.jpg';
+
+            const item = {
+                imgSrc: imgSrc,
+                nome: nomeFlor,
+                descricao: descricaoFlor,
+                preco: precoFlor
+            };
+
+            itensData.push(item);
+        }
+
+        const itensContainer = document.getElementById('itens-container');
+
+        function criarItem(itemData, itemId) {
+            const divItem = document.createElement('div');
+            divItem.className = 'item';
+
+            const img = document.createElement('img');
+            img.src = itemData.imgSrc;
+            img.alt = itemData.nome;
+
+            const titulo = document.createElement('h3');
+            titulo.textContent = itemData.nome;
+
+            const descricao = document.createElement('p');
+            descricao.textContent = itemData.descricao;
+
+            const preco = document.createElement('p');
+            preco.textContent = itemData.preco;
+
+            const btnComprar = document.createElement('button');
+            btnComprar.className = 'comprar-btn';
+            btnComprar.textContent = 'Comprar';
+            btnComprar.onclick = () => comprarItem(itemId);
+
+            divItem.appendChild(img);
+            divItem.appendChild(titulo);
+            divItem.appendChild(descricao);
+            divItem.appendChild(preco);
+            divItem.appendChild(btnComprar);
+
+            return divItem;
+        }
+
+        function comprarItem(itemId) {
+            alert(`Item ${itemId} comprado! Implemente sua lógica de compra aqui.`);
+            // Adicione sua lógica de compra aqui
+        }
+
+        // Adiciona os itens ao container
+        for (let i = 0; i < itensData.length; i++) {
+            const item = criarItem(itensData[i], i + 1);
+            itensContainer.appendChild(item);
+        }
+    </script>
+
+</body>
+
+</html>
